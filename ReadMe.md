@@ -29,6 +29,7 @@ Now you have the instance ready, let's run the docker container
 - sudo docker run --name nginx --restart always -d -p 80:80 -p 443:443 nginx
 
 ## SSL certificate expiry
+First, stop the docker container, if running.
 When you go to the application, you may get SSL error. In this situation, follow the guide: https://dev.to/shadid12/how-to-deploy-your-node-js-app-on-aws-with-nginx-and-ssl-3p5l
 
 In this guide, the steps are:
@@ -39,11 +40,14 @@ In this guide, the steps are:
 If you get an error, indicating Certbot MisconfigurationError: nginx restart failed, try: 
 https://stackoverflow.com/questions/55698042/certbot-misconfigurationerror-nginx-restart-failed
 
-After this, when you try the last command, you may get an error again, indicating some 400 error. To fix it, make sure you stop nginx container.
+
 
 In the log, it shows you where the certificates are built:
 - Certificate is saved at: /etc/letsencrypt/live/thegagali.com/fullchain.pem
 - Key is saved at:         /etc/letsencrypt/live/thegagali.com/privkey.pem
 
-Make sure your dockerfile refers to these addresses.
+Move these files:
+sudo cp /etc/letsencrypt/live/thegagali.com/fullchain.pem .
+sudo cp /etc/letsencrypt/live/thegagali.com/privkey.pem .
 
+and make sure the dockerfile refers to the correct location.

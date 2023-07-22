@@ -25,6 +25,7 @@ for setting up clientcredential for google, follow this demo: https://www.youtub
 
 Now you have the instance ready, let's run the docker container
 - cd diary_gateway
+- git pull
 - sudo docker build -t nginx .
 - sudo docker run --name nginx --restart always -d -p 80:80 -p 443:443 nginx
 

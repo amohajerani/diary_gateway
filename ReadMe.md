@@ -28,6 +28,9 @@ Now you have the instance ready, let's run the docker container
 - git pull
 - sudo docker build -t nginx .
 - sudo docker run --name nginx --restart always -d -p 80:80 -p 443:443 nginx
+For any updates, start by 
+- sudo docker stop nginx
+- sudo docker rm nginx
 
 ## SSL certificate expiry
 First, stop the docker container, if running.
@@ -41,6 +44,9 @@ In this guide, the steps are:
 If you get an error, indicating Certbot MisconfigurationError: nginx restart failed, try: 
 https://stackoverflow.com/questions/55698042/certbot-misconfigurationerror-nginx-restart-failed
 
+UPDATE:
+when i added provider subdomain, I did the following:
+sudo certbot certonly -d thegagali.com -d *.thegagali.com --manual --preferred-challenges=dns
 
 
 In the log, it shows you where the certificates are built:
@@ -48,7 +54,8 @@ In the log, it shows you where the certificates are built:
 - Key is saved at:         /etc/letsencrypt/live/thegagali.com/privkey.pem
 
 Move these files:
-sudo cp /etc/letsencrypt/live/thegagali.com/fullchain.pem .
-sudo cp /etc/letsencrypt/live/thegagali.com/privkey.pem .
+cd diary_gateway
+sudo cp /etc/letsencrypt/live/thegagali.com-0001/fullchain.pem .
+sudo cp /etc/letsencrypt/live/thegagali.com-0001/privkey.pem .
 
 and make sure the dockerfile refers to the correct location.

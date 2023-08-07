@@ -59,3 +59,4 @@ sudo cp /etc/letsencrypt/live/thegagali.com-0001/fullchain.pem .
 sudo cp /etc/letsencrypt/live/thegagali.com-0001/privkey.pem .
 
 and make sure the dockerfile refers to the correct location.
+
